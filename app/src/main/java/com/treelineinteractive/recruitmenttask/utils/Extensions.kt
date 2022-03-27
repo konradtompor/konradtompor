@@ -1,4 +1,4 @@
-package com.treelineinteractive.recruitmenttask.ui
+package com.treelineinteractive.recruitmenttask.utils
 
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
@@ -16,5 +16,5 @@ inline fun <T : ViewBinding> AppCompatActivity.viewBinding(crossinline factory: 
 fun <T> MutableLiveData<T>.asLiveData() = this as LiveData<T>
 
 fun <T> LiveData<T>.observer(lifecycleOwner: LifecycleOwner, setter: (T) -> Unit) {
-    observe(lifecycleOwner, { setter(it) })
+    observe(lifecycleOwner) { setter(it) }
 }

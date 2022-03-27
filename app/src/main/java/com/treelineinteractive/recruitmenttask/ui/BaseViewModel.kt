@@ -2,6 +2,7 @@ package com.treelineinteractive.recruitmenttask.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.treelineinteractive.recruitmenttask.utils.asLiveData
 import kotlin.properties.Delegates
 
 abstract class BaseViewModel<ViewState : BaseViewState, ViewAction : BaseAction>(initialState: ViewState): ViewModel() {

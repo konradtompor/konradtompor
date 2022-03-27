@@ -1,30 +1,21 @@
-package com.treelineinteractive.recruitmenttask.ui
+package com.treelineinteractive.recruitmenttask.ui.main
 
+import androidx.lifecycle.MutableLiveData
+import com.treelineinteractive.recruitmenttask.data.network.model.Product
 import com.treelineinteractive.recruitmenttask.data.network.model.ProductItem
 import com.treelineinteractive.recruitmenttask.data.repository.RepositoryRequestStatus
 import com.treelineinteractive.recruitmenttask.data.repository.ShopRepository
+import com.treelineinteractive.recruitmenttask.ui.BaseViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MainViewModel : BaseViewModel<MainViewModel.MainViewState, MainViewModel.MainViewAction>(MainViewState()) {
-
-    data class MainViewState(
-        val isLoading: Boolean = false,
-        val error: String? = null,
-        val items: List<ProductItem> = listOf()
-    ) : BaseViewState {
-        val isSuccess: Boolean
-            get() = !isLoading && error == null
-    }
-
-    sealed class MainViewAction : BaseAction {
-        object LoadingProducts : MainViewAction()
-        data class ProductsLoaded(val items: List<ProductItem>) : MainViewAction()
-        data class ProductsLoadingError(val error: String) : MainViewAction()
-    }
-
+class MainViewModel : BaseViewModel<MainViewState, MainViewAction>(
+    MainViewState()
+) {
     private val shopRepository = ShopRepository()
+
+    val products = MutableLiveData<List<Product>>()
 
     fun loadProducts() {
         GlobalScope.launch {
@@ -36,6 +27,7 @@ class MainViewModel : BaseViewModel<MainViewModel.MainViewState, MainViewModel.M
                         }
                         is RepositoryRequestStatus.COMPLETE -> {
                             sendAction(MainViewAction.ProductsLoaded(result.data))
+                            products.postValue(result.data.mapToData())
                         }
                         is RepositoryRequestStatus.Error -> {
                             sendAction(MainViewAction.ProductsLoadingError("Oops, something went wrong"))
@@ -56,5 +48,19 @@ class MainViewModel : BaseViewModel<MainViewModel.MainViewState, MainViewModel.M
             isLoading = false,
             error = viewAction.error
         )
+    }
+
+    private fun List<ProductItem>.mapToData(): List<Product> {
+        return this.map {
+            Product(
+                id = it.id,
+                type = it.type,
+                title = it.title,
+                description = it.description,
+                color = it.color,
+                available = it.available,
+                cost = it.cost.toBigDecimal()
+            )
+        }
     }
 }
