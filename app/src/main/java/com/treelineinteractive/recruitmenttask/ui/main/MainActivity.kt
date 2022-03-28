@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        adapter = ProductDataAdapter()
+        adapter = ProductDataAdapter(
+            onIncClicked = mainViewModel::onIncButtonClicked,
+            onDecClicked = mainViewModel::onDecButtonClicked
+        )
         val linearLayoutManager = LinearLayoutManager(this)
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = linearLayoutManager
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.products.observe(this) { products ->
             adapter.updateData(products)
         }
+
         mainViewModel.stateLiveData.observe { state ->
             binding.progressBar.isVisible = state.isLoading
             binding.errorLayout.isVisible = state.error != null

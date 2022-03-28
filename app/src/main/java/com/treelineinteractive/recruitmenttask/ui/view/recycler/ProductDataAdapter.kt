@@ -6,14 +6,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.treelineinteractive.recruitmenttask.data.network.model.Product
 import com.treelineinteractive.recruitmenttask.databinding.ViewProductItemBinding
 
-class ProductDataAdapter : RecyclerView.Adapter<ProductViewHolder>() {
+class ProductDataAdapter(
+    private val onIncClicked: (product: Product) -> Unit,
+    private val onDecClicked: (product: Product) -> Unit
+) : RecyclerView.Adapter<ProductViewHolder>() {
 
     private val products: ArrayList<Product> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemBinding =
             ViewProductItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ProductViewHolder(itemBinding)
+        return ProductViewHolder(itemBinding, onIncClicked, onDecClicked)
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
@@ -31,5 +34,4 @@ class ProductDataAdapter : RecyclerView.Adapter<ProductViewHolder>() {
         products.addAll(productsList)
         notifyDataSetChanged()
     }
-
 }

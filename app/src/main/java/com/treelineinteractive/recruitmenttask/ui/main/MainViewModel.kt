@@ -26,8 +26,9 @@ class MainViewModel : BaseViewModel<MainViewState, MainViewAction>(
                             sendAction(MainViewAction.LoadingProducts)
                         }
                         is RepositoryRequestStatus.COMPLETE -> {
-                            sendAction(MainViewAction.ProductsLoaded(result.data))
-                            products.postValue(result.data.mapToData())
+                            val productsData = (result.data as ArrayList).mapToData()
+                            sendAction(MainViewAction.ProductsLoaded(productsData))
+                            products.postValue(productsData)
                         }
                         is RepositoryRequestStatus.Error -> {
                             sendAction(MainViewAction.ProductsLoadingError("Oops, something went wrong"))
@@ -48,9 +49,23 @@ class MainViewModel : BaseViewModel<MainViewState, MainViewAction>(
             isLoading = false,
             error = viewAction.error
         )
+        is MainViewAction.IncrementSold -> {
+            state.incrementSold(viewAction.item)
+        }
+        is MainViewAction.DecrementSold -> {
+            state.decrementSold(viewAction.item)
+        }
     }
 
-    private fun List<ProductItem>.mapToData(): List<Product> {
+    fun onIncButtonClicked(product: Product) {
+        sendAction(MainViewAction.IncrementSold(product))
+    }
+
+    fun onDecButtonClicked(product: Product) {
+        sendAction(MainViewAction.DecrementSold(product))
+    }
+
+    private fun ArrayList<ProductItem>.mapToData(): ArrayList<Product> {
         return this.map {
             Product(
                 id = it.id,
@@ -61,6 +76,6 @@ class MainViewModel : BaseViewModel<MainViewState, MainViewAction>(
                 available = it.available,
                 cost = it.cost.toBigDecimal()
             )
-        }
+        } as ArrayList<Product>
     }
 }
