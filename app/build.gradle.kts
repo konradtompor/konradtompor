@@ -4,6 +4,7 @@ plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_KAPT)
+    id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
 }
 
 android {
@@ -60,4 +61,5 @@ dependencies {
     implementation(LibraryDependency.COROUTINES)
     implementation(LibraryDependency.COROUTINES_ANDROID)
     implementation(LibraryDependency.CARD_VIEW)
+    implementation(LibraryDependency.VIEW_MODEL_SCOPE)
 }

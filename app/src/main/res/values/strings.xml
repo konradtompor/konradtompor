@@ -9,4 +9,5 @@
     <string name="item_type">Type: %s</string>
     <string name="item_color">Color: %s</string>
     <string name="sold_default_value">0</string>
+    <string name="snack_bar_error">E-mail cannot be sent</string>
 </resources>

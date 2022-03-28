@@ -7,7 +7,7 @@ data class ProductItem(
     @SerializedName("type") val type: String,
     @SerializedName("color") val color: String,
     @SerializedName("available") val available: Int,
-    @SerializedName("cost") val cost: Float,
+    @SerializedName("cost") val cost: Float, //TODO get know why api does not returns this value
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String
 )

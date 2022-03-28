@@ -1,15 +1,23 @@
 package com.treelineinteractive.recruitmenttask.ui.main
 
+import android.content.ActivityNotFoundException
+import android.graphics.Color.red
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.treelineinteractive.recruitmenttask.R
 import com.treelineinteractive.recruitmenttask.databinding.ActivityMainBinding
 import com.treelineinteractive.recruitmenttask.ui.view.recycler.ProductDataAdapter
 import com.treelineinteractive.recruitmenttask.utils.observer
 import com.treelineinteractive.recruitmenttask.utils.viewBinding
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)
@@ -27,6 +35,11 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.loadProducts()
     }
 
+    override fun onStop() {
+        super.onStop()
+        mainViewModel.collectReport()
+    }
+
     private fun initView() {
         adapter = ProductDataAdapter(
             onIncClicked = mainViewModel::onIncButtonClicked,
@@ -40,6 +53,19 @@ class MainActivity : AppCompatActivity() {
     private fun initListeners() {
         binding.retryButton.setOnClickListener {
             mainViewModel.loadProducts()
+        }
+
+        binding.sendReportButton.setOnClickListener {
+            try {
+                startActivity(mainViewModel.onReportButtonClicked())
+            } catch (activityNotFoundException: ActivityNotFoundException) {
+                val snackBar = Snackbar.make(
+                    binding.root,
+                    getString(R.string.snack_bar_error),
+                    Snackbar.LENGTH_LONG
+                ).setBackgroundTint(ContextCompat.getColor(this, R.color.red))
+                snackBar.show()
+            }
         }
     }
 

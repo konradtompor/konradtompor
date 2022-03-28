@@ -5,9 +5,11 @@ import com.treelineinteractive.recruitmenttask.data.network.model.Report
 import com.treelineinteractive.recruitmenttask.data.network.service.ServiceFactory
 import com.treelineinteractive.recruitmenttask.data.network.service.ShopService
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.supervisorScope
 
+@ExperimentalCoroutinesApi
 class ShopRepository {
     private val shopService = ServiceFactory.createService<ShopService>()
     private val productsLocalCache = ProductsLocalCache()
@@ -35,22 +37,36 @@ class ShopRepository {
         }
     }
 
-    private fun collectDailySold(report: ArrayList<Report>) {
-        productsLocalCache.saveSoldReportDay(report)
+    fun getSalesForReport(): List<Report> {
+        return productsLocalCache.getSoldProducts()
+    }
+
+    fun collectDailySold(report: Report) {
+        if (productsLocalCache.getSoldProducts().any { it.date == report.date }) {
+            productsLocalCache.updateSoldProducts(report)
+        } else {
+            productsLocalCache.saveSoldReportDay(report)
+        }
     }
 }
 
 class ProductsLocalCache {
     private val savedProducts = MutableStateFlow<List<ProductItem>>(listOf())
-    private val savedSoldReportDay = ArrayList<Report>(arrayListOf())
+    private val savedSoldProducts = ArrayList<Report>(arrayListOf())
 
     suspend fun saveProducts(products: List<ProductItem>) {
         savedProducts.emit(products)
     }
 
-    fun saveSoldReportDay(report: ArrayList<Report>) {
-        savedSoldReportDay.addAll(report)
+    fun saveSoldReportDay(report: Report) {
+        savedSoldProducts.add(report)
+    }
+
+    fun updateSoldProducts(report: Report) {
+        savedSoldProducts.last().products = report.products.filter { it.sold > 0 }
     }
 
     fun getProducts(): Flow<List<ProductItem>> = savedProducts
+
+    fun getSoldProducts(): List<Report> = savedSoldProducts
 }
