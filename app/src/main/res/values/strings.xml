@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">RecruitmentTask</string>
+    <string name="button_retry_label">Retry</string>
+    <string name="button_report_label">Report</string>
+    <string name="balance_label">Balance</string>
+    <string name="products_available">Available:</string>
+    <string name="products_sold">Sold:</string>
+    <string name="item_name">Name: %s</string>
+    <string name="item_type">Type: %s</string>
+    <string name="item_color">Color: %s</string>
+    <string name="sold_default_value">0</string>
 </resources>
