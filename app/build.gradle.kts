@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
+    id(Plugins.KOTLIN_KAPT)
 }
 
 android {
@@ -58,4 +59,5 @@ dependencies {
     implementation(LibraryDependency.LOGGING_INTERCEPTOR)
     implementation(LibraryDependency.COROUTINES)
     implementation(LibraryDependency.COROUTINES_ANDROID)
+    implementation(LibraryDependency.CARD_VIEW)
 }

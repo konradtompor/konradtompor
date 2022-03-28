@@ -6,7 +6,8 @@ data class Product(
     val id: String,
     val type: String,
     val color: String,
-    val available: Int,
+    var available: Int,
+    var sold: Int = 0,
     val cost: BigDecimal,
     val title: String,
     val description: String

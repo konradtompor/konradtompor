@@ -9,6 +9,7 @@ object LibraryDependency {
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${LibraryVersion.COROUTINES}"
     const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${LibraryVersion.COROUTINES}"
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${LibraryVersion.LOGGING_INTERCEPTOR}"
+    const val CARD_VIEW = "androidx.cardview:cardview:${LibraryVersion.CARD_VIEW}"
 }
 
 object LibraryVersion {
@@ -20,4 +21,5 @@ object LibraryVersion {
     const val COROUTINES = "1.5.0"
     const val RETROFIT_COROUTINES_ADAPTER = "0.9.2"
     const val LOGGING_INTERCEPTOR = "4.9.1"
+    const val CARD_VIEW = "1.0.0"
 }
