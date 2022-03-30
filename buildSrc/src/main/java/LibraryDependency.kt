@@ -10,7 +10,17 @@ object LibraryDependency {
     const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${LibraryVersion.COROUTINES}"
     const val LOGGING_INTERCEPTOR = "com.squareup.okhttp3:logging-interceptor:${LibraryVersion.LOGGING_INTERCEPTOR}"
     const val CARD_VIEW = "androidx.cardview:cardview:${LibraryVersion.CARD_VIEW}"
-    const val VIEW_MODEL_SCOPE = "androidx.lifecycle:lifecycle-viewmodel-ktx:${LibraryVersion.VIEW_MODEL_SCOPE}"}
+    const val VIEW_MODEL_SCOPE = "androidx.lifecycle:lifecycle-viewmodel-ktx:${LibraryVersion.VIEW_MODEL_SCOPE}"
+    const val JUNIT = "org.junit.jupiter:junit-jupiter:${LibraryVersion.JUNIT}"
+    const val JUNIT_API = "org.junit.jupiter:junit-jupiter-api:${LibraryVersion.JUNIT}"
+    const val JUNIT_ENGINE = "org.junit.jupiter:junit-jupiter-engine:${LibraryVersion.JUNIT}"
+    const val FEST_ASSERT_CORE = "org.easytesting:fest-assert-core:${LibraryVersion.FEST_ASSERT_CORE}"
+    const val MOCKK = "io.mockk:mockk:${LibraryVersion.MOCKK}"
+    const val DAGGER = "com.google.dagger:dagger:${LibraryVersion.DAGGER}"
+    const val DAGGER_ANDROID = "com.google.dagger:dagger-android:${LibraryVersion.DAGGER}"
+    const val DAGGER_ANDROID_SUPPORT = "com.google.dagger:dagger-android-support:${LibraryVersion.DAGGER}"
+    const val DAGGER_COMPILER = "com.google.dagger:dagger-compiler:${LibraryVersion.DAGGER}"
+    const val DAGGER_PROCESSOR = "com.google.dagger:dagger-android-processor:${LibraryVersion.DAGGER}"}
 
 object LibraryVersion {
     const val KOTLIN = "1.5.0"
@@ -23,4 +33,8 @@ object LibraryVersion {
     const val LOGGING_INTERCEPTOR = "4.9.1"
     const val CARD_VIEW = "1.0.0"
     const val VIEW_MODEL_SCOPE = "2.3.1"
+    const val JUNIT = "5.8.0"
+    const val MOCKK = "1.12.0"
+    const val DAGGER = "2.38.1"
+    const val FEST_ASSERT_CORE = "2.0M10"
 }

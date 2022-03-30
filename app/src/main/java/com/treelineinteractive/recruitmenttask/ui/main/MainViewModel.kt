@@ -16,13 +16,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class MainViewModel : BaseViewModel<MainViewState, MainViewAction>(
+class MainViewModel @Inject constructor(
+    private val shopRepository: ShopRepository
+) : BaseViewModel<MainViewState, MainViewAction>(
     MainViewState()
 ) {
-    private val shopRepository = ShopRepository()
-
     val products = MutableLiveData<List<Product>>()
 
     fun loadProducts() {

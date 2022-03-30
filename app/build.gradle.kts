@@ -1,10 +1,7 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
-
 plugins {
     id(Plugins.ANDROID_APPLICATION)
     id(Plugins.KOTLIN_ANDROID)
     id(Plugins.KOTLIN_KAPT)
-    id(Plugins.KOTLIN_ANDROID_EXTENSIONS)
 }
 
 android {
@@ -47,6 +44,10 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    packagingOptions {
+        exclude ("META-INF/*")
+    }
 }
 
 dependencies {
@@ -62,4 +63,16 @@ dependencies {
     implementation(LibraryDependency.COROUTINES_ANDROID)
     implementation(LibraryDependency.CARD_VIEW)
     implementation(LibraryDependency.VIEW_MODEL_SCOPE)
+    implementation(LibraryDependency.JUNIT)
+    implementation(LibraryDependency.JUNIT_API)
+    implementation(LibraryDependency.JUNIT_ENGINE)
+    implementation(LibraryDependency.MOCKK)
+    implementation(LibraryDependency.DAGGER)
+    implementation(LibraryDependency.DAGGER_ANDROID)
+    implementation(LibraryDependency.DAGGER_ANDROID_SUPPORT)
+    implementation(LibraryDependency.FEST_ASSERT_CORE)
+    testImplementation(LibraryDependency.JUNIT)
+
+    kapt(LibraryDependency.DAGGER_COMPILER)
+    kapt(LibraryDependency.DAGGER_PROCESSOR)
 }
