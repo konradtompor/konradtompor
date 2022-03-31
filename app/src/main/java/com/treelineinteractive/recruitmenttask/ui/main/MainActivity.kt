@@ -18,7 +18,6 @@ import com.treelineinteractive.recruitmenttask.utils.viewBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)

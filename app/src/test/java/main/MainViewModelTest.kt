@@ -12,7 +12,6 @@ import org.fest.assertions.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-@ExperimentalCoroutinesApi
 class MainViewModelTest {
 
     private val shopRepository: ShopRepository = mockk(relaxed = true)

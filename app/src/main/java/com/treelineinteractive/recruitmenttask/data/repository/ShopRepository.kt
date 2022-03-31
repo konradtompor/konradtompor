@@ -9,7 +9,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.supervisorScope
 
-@ExperimentalCoroutinesApi
 class ShopRepository {
     private val shopService = ServiceFactory.createService<ShopService>()
     private val productsLocalCache = ProductsLocalCache()
@@ -23,6 +22,8 @@ class ShopRepository {
         }
     }
 
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     private fun fetchProducts(): Flow<RepositoryRequestStatus> = channelFlow {
         send(RepositoryRequestStatus.FETCHING)
 

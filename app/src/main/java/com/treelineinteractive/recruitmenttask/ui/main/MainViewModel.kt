@@ -18,7 +18,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 class MainViewModel @Inject constructor(
     private val shopRepository: ShopRepository
 ) : BaseViewModel<MainViewState, MainViewAction>(
